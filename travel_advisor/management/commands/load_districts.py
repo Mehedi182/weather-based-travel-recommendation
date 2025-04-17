@@ -154,9 +154,11 @@ class Command(BaseCommand):
         DistrictWeatherData.objects.filter(date__gte=seven_days_ago).delete()
 
         dfs = district_wise_data()
-        if dfs:  # Check if the list is not empty
+        if dfs:
             df = pd.concat(dfs, ignore_index=True)
-            district_datas = [DistrictWeatherData(**row) for row in df.to_dict(orient="records")]
+            district_datas = [
+                DistrictWeatherData(**row) for row in df.to_dict(orient="records")
+            ]
         else:
             district_datas = []
 
