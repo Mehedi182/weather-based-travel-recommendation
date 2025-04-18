@@ -42,6 +42,7 @@
 
 7. **Test The api via postman(Postman collection provided)**
 
+
 ### To Run Using Docker
 
 To run the application using Docker:

@@ -1,3 +1,5 @@
+import sys
+
 from django.apps import AppConfig
 
 
@@ -6,6 +8,8 @@ class TravelAdvisorConfig(AppConfig):
     name = "travel_advisor"
 
     def ready(self):
-        from . import scheduler
+        # Avoid running when doing migrations or other manage.py commands
+        if "runserver" in sys.argv:
+            from travel_advisor.scheduler import start  # Only import if needed
 
-        scheduler.start()
+            start()
