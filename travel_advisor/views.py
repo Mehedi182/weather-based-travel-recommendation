@@ -1,12 +1,24 @@
 from datetime import date, timedelta
 
+from django.db import connection
 from django.db.models import Avg
+from django.http import JsonResponse
 from rest_framework import status
 from rest_framework.response import Response
 from rest_framework.views import APIView
 
 from .models import DistrictWeatherData
 from .serializers import BestDistrictsSerializer
+
+
+class HealthCheckView(APIView):
+    def get(self, request):
+        try:
+            # Check database connection
+            connection.ensure_connection()
+            return JsonResponse({"status": "healthy"}, status=200)
+        except Exception as e:
+            return JsonResponse({"status": "unhealthy", "error": str(e)}, status=500)
 
 
 class BestDistrictsView(APIView):
