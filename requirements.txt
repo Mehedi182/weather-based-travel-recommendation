@@ -1,4 +1,5 @@
 anyio==4.9.0
+APScheduler==3.11.0
 asgiref==3.8.1
 asttokens==3.0.0
 attrs==25.3.0
@@ -51,6 +52,7 @@ tornado==6.4.2
 traitlets==5.14.3
 typing_extensions==4.13.2
 tzdata==2025.2
+tzlocal==5.3.1
 url-normalize==2.2.0
 urllib3==2.4.0
 wcwidth==0.2.13
