@@ -5,6 +5,7 @@ from django.db import connection
 from django.db.models import Avg
 from django.http import JsonResponse
 from rest_framework import status
+from rest_framework.permissions import IsAuthenticated
 from rest_framework.response import Response
 from rest_framework.views import APIView
 
@@ -28,6 +29,10 @@ class HealthCheckView(APIView):
 
 
 class BestDistrictsView(APIView):
+    permission_classes = [
+        IsAuthenticated,
+    ]
+
     def get(self, request):
         logger.info("Fetching best districts for travel")
         try:
@@ -51,6 +56,10 @@ class BestDistrictsView(APIView):
 
 
 class TravelRecommendationView(APIView):
+    permission_classes = [
+        IsAuthenticated,
+    ]
+
     def post(self, request):
         logger.info("Processing travel recommendation request")
         current_lat = request.data.get("current_latitude")
