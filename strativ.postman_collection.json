@@ -1,0 +1,327 @@
+{
+	"info": {
+		"_postman_id": "a9a0a08e-ca12-4985-baca-3b600991c2d3",
+		"name": "strativ",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "21712128"
+	},
+	"item": [
+		{
+			"name": "Auth",
+			"item": [
+				{
+					"name": "user-registration",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							},
+							{
+								"key": "Authorization",
+								"value": "Bearer {{accessToken}}"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"username\": \"admin_smh\",\n    \"first_name\": \"b\",\n    \"last_name\": \"b\",\n    \"password\": \"admin\",\n    \"email\": \"users@examplse.com\",\n    \"is_staff\": true,\n    \"is_superuser\": true\n}"
+						},
+						"url": {
+							"raw": "http://127.0.0.1:8000/api/auth/user-registration/",
+							"protocol": "http",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "8000",
+							"path": [
+								"api",
+								"auth",
+								"user-registration",
+								""
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "access-token",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"username\" : \"admin\",\n    \"password\" : \"admin\"\n}"
+						},
+						"url": {
+							"raw": "http://127.0.0.1:8000/api/auth/token/",
+							"protocol": "http",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "8000",
+							"path": [
+								"api",
+								"auth",
+								"token",
+								""
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "change-password",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0b2tlbl90eXBlIjoiYWNjZXNzIiwiZXhwIjoxNzQ1MDAxMjQ0LCJpYXQiOjE3NDUwMDA5NDQsImp0aSI6ImY5MjE1MDYxMWVlNTQzNmM4MWZjMGZmYWI1NjcxOTZmIiwidXNlcl9pZCI6MX0.PeH6NKGWi21_jVCzcenAV0kt4HlOcXkHE9eP0Ael2bQ",
+									"type": "string"
+								}
+							]
+						},
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							},
+							{
+								"key": "Authorization",
+								"value": "Bearer {{accessToken}}",
+								"disabled": true
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"old_password\": \"admin1\",\n  \"new_password\": \"admin\",\n  \"confirm_password\": \"admin\"\n}"
+						},
+						"url": {
+							"raw": "http://127.0.0.1:8000/api/auth/change-password/",
+							"protocol": "http",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "8000",
+							"path": [
+								"api",
+								"auth",
+								"change-password",
+								""
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "users",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0b2tlbl90eXBlIjoiYWNjZXNzIiwiZXhwIjoxNzQ1MDAxMjQ0LCJpYXQiOjE3NDUwMDA5NDQsImp0aSI6ImY5MjE1MDYxMWVlNTQzNmM4MWZjMGZmYWI1NjcxOTZmIiwidXNlcl9pZCI6MX0.PeH6NKGWi21_jVCzcenAV0kt4HlOcXkHE9eP0Ael2bQ",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							},
+							{
+								"key": "Authorization",
+								"value": "Bearer {{accessToken}}",
+								"disabled": true
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"url": {
+							"raw": "http://127.0.0.1:8000/api/auth/users/",
+							"protocol": "http",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "8000",
+							"path": [
+								"api",
+								"auth",
+								"users",
+								""
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "refresh-token",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							},
+							{
+								"key": "Authorization",
+								"value": "Bearer {{accessToken}}"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"refresh\": \"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0b2tlbl90eXBlIjoicmVmcmVzaCIsImV4cCI6MTc0NTA4NjYzOSwiaWF0IjoxNzQ1MDAwMjM5LCJqdGkiOiJkZDQ2MmQwNDYyMWQ0NDdjOTRlMDY3OWQ0YTJkMDQzMiIsInVzZXJfaWQiOjR9.It06wETvsbeDxGbYCr9e1VPj0gUS-EsQqERxsud1iQw\"\n}"
+						},
+						"url": {
+							"raw": "http://127.0.0.1:8000/api/auth/token-refresh/",
+							"protocol": "http",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "8000",
+							"path": [
+								"api",
+								"auth",
+								"token-refresh",
+								""
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "best-districts",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0b2tlbl90eXBlIjoiYWNjZXNzIiwiZXhwIjoxNzQ1MDAxODY5LCJpYXQiOjE3NDUwMDE1NjksImp0aSI6IjVmOGI0ZjczMjA2NTQ5ZmJiZmQwOTY3OGUxOTJlMjNhIiwidXNlcl9pZCI6MX0.9gNRy66pfqIv_BdAbSEnlZFSPnPCEVTWgMNYeUsRh2A",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://127.0.0.1:8000/api/best-districts/",
+					"protocol": "http",
+					"host": [
+						"127",
+						"0",
+						"0",
+						"1"
+					],
+					"port": "8000",
+					"path": [
+						"api",
+						"best-districts",
+						""
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "travel-recommendation",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0b2tlbl90eXBlIjoiYWNjZXNzIiwiZXhwIjoxNzQ1MDAxODY5LCJpYXQiOjE3NDUwMDE1NjksImp0aSI6IjVmOGI0ZjczMjA2NTQ5ZmJiZmQwOTY3OGUxOTJlMjNhIiwidXNlcl9pZCI6MX0.9gNRy66pfqIv_BdAbSEnlZFSPnPCEVTWgMNYeUsRh2A",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"current_latitude\": 23.7115253,\n    \"current_longitude\": 90.4111451,\n    \"destination_district\": \"cumilla\",\n    \"travel_date\": \"2025-04-22\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://127.0.0.1:8000/api/travel-recommendation/",
+					"protocol": "http",
+					"host": [
+						"127",
+						"0",
+						"0",
+						"1"
+					],
+					"port": "8000",
+					"path": [
+						"api",
+						"travel-recommendation",
+						""
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "healthCheck",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://127.0.0.1:8000/api/health/",
+					"protocol": "http",
+					"host": [
+						"127",
+						"0",
+						"0",
+						"1"
+					],
+					"port": "8000",
+					"path": [
+						"api",
+						"health",
+						""
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}

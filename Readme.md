@@ -3,45 +3,69 @@
 1. **Clone the Repository**:
 
    ```bash
-   git clone https://github.com/Mehedi182/weather-based-travel-recommendation.git
-   cd customer_support_service_app
+      git clone https://github.com/Mehedi182/weather-based-travel-recommendation.git
+      cd customer_support_service_app
    ```
 
 2. **Create a Virtual Environment and Install Dependencies**:
 
    ```bash
-   python3 -m venv venv
-   source venv/bin/activate  # For Windows: venv\Scripts\activate
-   pip install -r requirements.txt
+      python3 -m venv venv
+      source venv/bin/activate  # For Windows: venv\Scripts\activate
+      pip install -r requirements.txt
    ```
 
 3. **Apply Database Migrations**:
 
    ```bash
-   python manage.py migrate
+      python manage.py migrate
    ```
 
 4. **Load The Districts info, wheater and air quality data for the first time**
 
    ```bash
-   python manage.py load_districts
-   # it will call every day 12:00AM automatically to load 7days temparature air quality data. Used APsScheduler for this.
+      python manage.py load_districts
+      # it will call every day 12:00AM automatically to load 7days temparature air quality data. Used APsScheduler for this.
    ```
 
 5. **Start the Development Server**:
 
    ```bash
-   python manage.py runserver
+      python manage.py runserver
    ```
 
-6. **Run Test**:
+6. **To Run Test**:
 
    ```bash
-   python manage.py test
+      python manage.py test
    ```
 
-7. **Test The api via postman(Postman collection provided)**
+7. **Test The api via postman(Postman collection provided)** <br>
+   **Auth Section**
 
+   ```bash
+      User Registration – POST /api/auth/user-registration/
+
+      Access Token – POST /api/auth/token/
+
+      Change Password – PUT /api/auth/change-password/
+
+      List Users – GET /api/auth/users/
+
+      Refresh Token – POST /api/auth/token-refresh/
+   ```
+
+   **APIs**
+
+   ```bash
+      HealthCheck – GET /api/health/
+   ```
+
+   ```bash
+      Best Districts – GET /api/best-districts/
+      Travel Recommendation – POST /api/travel-recommendation/
+      # api need authentication. token need to be passed through Bearer Token. Example api information are availble in postman collection
+   ```
 
 ### To Run Using Docker
 
