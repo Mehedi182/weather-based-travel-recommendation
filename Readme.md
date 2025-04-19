@@ -1,75 +1,83 @@
+# Weather-Based Travel Recommendation System
+
+A lightweight Django-based web application designed to provide travel recommendations based on weather and air quality data. It incorporates user authentication, automated data updates, and a minimalistic setup using SQLite and Django Simple JWT for secure access.
+
+---
+
+### Key Features
+
+- **Weather-Based Travel Recommendations**: Provides travel recommendations based on weather and air quality data for different districts.
+- **District Ranking**: Lists the top 10 districts for travel based on average temperature and PM2.5 levels over the next 7 days.
+- **Daily Data Updates**: Automatically updates weather and air quality data every day at 12:00 AM using APScheduler.
+- **Health Check Endpoint**: Includes a `/health/` endpoint to monitor the application's health and database connectivity.
+- **User Authentication**: Implements user authentication using Django Simple JWT for secure access to APIs.
+- **User Management**: Supports user registration, password change, and listing all registered users.
+- **SQLite Database**: Uses SQLite for a lightweight and minimalistic database setup, suitable for development and small-scale projects.
+- **Postman Collection**: Provides a Postman collection for easy testing of all API endpoints.
+- **Dockerized Setup**: Includes a Docker configuration for containerized deployment and simplified setup.
+
+---
+
 ### Local Setup Instructions
 
 1. **Clone the Repository**:
 
    ```bash
-      git clone https://github.com/Mehedi182/weather-based-travel-recommendation.git
-      cd customer_support_service_app
+   git clone https://github.com/Mehedi182/weather-based-travel-recommendation.git
+   cd customer_support_service_app
    ```
 
 2. **Create a Virtual Environment and Install Dependencies**:
 
    ```bash
-      python3 -m venv venv
-      source venv/bin/activate  # For Windows: venv\Scripts\activate
-      pip install -r requirements.txt
+   python3 -m venv venv
+   source venv/bin/activate  # For Windows: venv\Scripts\activate
+   pip install -r requirements.txt
    ```
 
 3. **Apply Database Migrations**:
 
    ```bash
-      python manage.py migrate
+   python manage.py migrate
    ```
 
-4. **Load The Districts info, wheater and air quality data for the first time**
+4. **Load The Districts Info, Weather, and Air Quality Data for the First Time**:
 
    ```bash
-      python manage.py load_districts
-      # it will call every day 12:00AM automatically to load 7days temparature air quality data. Used APsScheduler for this.
+   python manage.py load_districts
+   # It will call every day at 12:00 AM automatically to load 7 days of temperature and air quality data. Used APScheduler for this.
    ```
 
 5. **Start the Development Server**:
 
    ```bash
-      python manage.py runserver
+   python manage.py runserver
    ```
 
-6. **To Run Test**:
+6. **To Run Tests**:
 
    ```bash
-      python manage.py test
+   python manage.py test
    ```
 
-7. **Test The api via postman(Postman collection provided)** <br>
-   **Auth Section**
+7. **Test the API via Postman (Postman Collection Provided)**:
 
-   ```bash
-      User Registration – POST /api/auth/user-registration/
+   **Auth Section**:
+   - **User Registration** – `POST /api/auth/user-registration/`
+   - **Access Token** – `POST /api/auth/token/`
+   - **Change Password** – `PUT /api/auth/change-password/`
+   - **List Users** – `GET /api/auth/users/`
+   - **Refresh Token** – `POST /api/auth/token-refresh/`
 
-      Access Token – POST /api/auth/token/
+   **APIs**:
+   - **HealthCheck** – `GET /api/health/`
+   - **Best Districts** – `GET /api/best-districts/`
+   - **Travel Recommendation** – `POST /api/travel-recommendation/`
+     - API requires authentication. Token needs to be passed through Bearer Token. Example API information is available in the Postman collection.
 
-      Change Password – PUT /api/auth/change-password/
-
-      List Users – GET /api/auth/users/
-
-      Refresh Token – POST /api/auth/token-refresh/
-   ```
-
-   **APIs**
-
-   ```bash
-      HealthCheck – GET /api/health/
-   ```
-
-   ```bash
-      Best Districts – GET /api/best-districts/
-      Travel Recommendation – POST /api/travel-recommendation/
-      # api need authentication. token need to be passed through Bearer Token. Example api information are availble in postman collection
-   ```
+---
 
 ### To Run Using Docker
-
-To run the application using Docker:
 
 1. **Build and Start the Docker Container**:
 
@@ -78,6 +86,7 @@ To run the application using Docker:
    ```
 
 2. **Stop and Clean Up**:
+
    ```bash
    docker-compose down
    ```

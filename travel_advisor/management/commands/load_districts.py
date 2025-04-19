@@ -122,7 +122,7 @@ def get_weather_and_air_quality(
 
 def district_wise_data() -> pd.DataFrame:
     file_path = os.path.join(os.path.dirname(__file__), "bd_districts.json")
-    with open(file_path, "r") as file:
+    with open(file_path, encoding="utf8") as file:
         bd_districts = json.load(file)
     dfs = []
     for district in bd_districts["districts"]:

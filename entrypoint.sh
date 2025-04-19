@@ -4,10 +4,10 @@
 set -e
 
 # Apply database migrations
-python manage.py migrate
+python manage.py migrate &
 
 # Load initial data
-python manage.py load_districts 
+python manage.py load_districts &
 
 # Start the main application
 echo "Starting Django server..."
