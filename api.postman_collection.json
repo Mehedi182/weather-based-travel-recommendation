@@ -1,7 +1,7 @@
 {
 	"info": {
 		"_postman_id": "a9a0a08e-ca12-4985-baca-3b600991c2d3",
-		"name": "strativ",
+		"name": "weather-based-travel-recommendation-strativ",
 		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
 		"_exporter_id": "21712128"
 	},
@@ -16,11 +16,8 @@
 						"header": [
 							{
 								"key": "Content-Type",
-								"value": "application/json"
-							},
-							{
-								"key": "Authorization",
-								"value": "Bearer {{accessToken}}"
+								"value": "application/json",
+								"type": "text"
 							}
 						],
 						"body": {
@@ -215,6 +212,103 @@
 								"auth",
 								"token-refresh",
 								""
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "third-party-apis",
+			"item": [
+				{
+					"name": "wheater-forecast",
+					"request": {
+						"auth": {
+							"type": "noauth"
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "https://api.open-meteo.com/v1/forecast?latitude=23.7115253&longitude=90.4111451&hourly=temperature_2m&timezone=Asia/Dhaka&forecast_days=7",
+							"protocol": "https",
+							"host": [
+								"api",
+								"open-meteo",
+								"com"
+							],
+							"path": [
+								"v1",
+								"forecast"
+							],
+							"query": [
+								{
+									"key": "latitude",
+									"value": "23.7115253"
+								},
+								{
+									"key": "longitude",
+									"value": "90.4111451"
+								},
+								{
+									"key": "hourly",
+									"value": "temperature_2m"
+								},
+								{
+									"key": "timezone",
+									"value": "Asia/Dhaka"
+								},
+								{
+									"key": "forecast_days",
+									"value": "7"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "air-quality",
+					"request": {
+						"auth": {
+							"type": "noauth"
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "https://air-quality-api.open-meteo.com/v1/air-quality?latitude=23.7115253&longitude=90.4111451&hourly=pm10,pm2_5&timezone=Asia/Dhaka&forecast_days=7",
+							"protocol": "https",
+							"host": [
+								"air-quality-api",
+								"open-meteo",
+								"com"
+							],
+							"path": [
+								"v1",
+								"air-quality"
+							],
+							"query": [
+								{
+									"key": "latitude",
+									"value": "23.7115253"
+								},
+								{
+									"key": "longitude",
+									"value": "90.4111451"
+								},
+								{
+									"key": "hourly",
+									"value": "pm10,pm2_5"
+								},
+								{
+									"key": "timezone",
+									"value": "Asia/Dhaka"
+								},
+								{
+									"key": "forecast_days",
+									"value": "7"
+								}
 							]
 						}
 					},
