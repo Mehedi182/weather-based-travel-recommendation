@@ -1,8 +1,10 @@
 from datetime import date, timedelta
 
+from django.contrib.auth.models import User
 from django.urls import reverse
 from rest_framework import status
 from rest_framework.test import APITestCase
+from rest_framework_simplejwt.tokens import AccessToken
 
 from .models import DistrictWeatherData
 from .views import TravelRecommendationView
@@ -10,6 +12,12 @@ from .views import TravelRecommendationView
 
 class WeatherRecommendationTests(APITestCase):
     def setUp(self):
+        # Create a test user
+        self.user = User.objects.create_user(username="testuser", password="password123")
+        self.token = str(AccessToken.for_user(self.user))  # Generate JWT token for the user
+        self.auth_header = {"HTTP_AUTHORIZATION": f"Bearer {self.token}"}
+
+        # Create test data
         self.district_1 = DistrictWeatherData.objects.create(
             name="District A",
             date=date.today(),
@@ -40,7 +48,7 @@ class WeatherRecommendationTests(APITestCase):
 
     def test_best_districts_view(self):
         url = reverse("best-districts")
-        response = self.client.get(url)
+        response = self.client.get(url, **self.auth_header)  # Include authentication header
         self.assertEqual(response.status_code, status.HTTP_200_OK)
         self.assertTrue(len(response.data) > 0)
         self.assertIn("name", response.data[0])
@@ -53,7 +61,7 @@ class WeatherRecommendationTests(APITestCase):
             "destination_district": "District B",
             "travel_date": str(date.today()),
         }
-        response = self.client.post(url, data, format="json")
+        response = self.client.post(url, data, format="json", **self.auth_header)  # Include authentication header
         self.assertEqual(response.status_code, status.HTTP_200_OK)
         self.assertIn("recommendation", response.data)
         self.assertIn("comparison", response.data)
@@ -64,7 +72,7 @@ class WeatherRecommendationTests(APITestCase):
             "current_latitude": 23.8103,
             "travel_date": str(date.today()),
         }
-        response = self.client.post(url, data, format="json")
+        response = self.client.post(url, data, format="json", **self.auth_header)  # Include authentication header
         self.assertEqual(response.status_code, status.HTTP_400_BAD_REQUEST)
 
     def test_travel_recommendation_no_destination_data(self):
@@ -75,7 +83,7 @@ class WeatherRecommendationTests(APITestCase):
             "destination_district": "NonExistent",
             "travel_date": str(date.today()),
         }
-        response = self.client.post(url, data, format="json")
+        response = self.client.post(url, data, format="json", **self.auth_header)  # Include authentication header
         self.assertEqual(response.status_code, status.HTTP_404_NOT_FOUND)
 
     def test_recommendation_good_conditions(self):
@@ -101,6 +109,5 @@ class WeatherRecommendationTests(APITestCase):
             "destination_district": "District B",
             "travel_date": str(date.today()),
         }
-        print(data)
-        response = self.client.post(url, data, format="json")
+        response = self.client.post(url, data, format="json", **self.auth_header)  # Include authentication header
         self.assertEqual(response.status_code, status.HTTP_404_NOT_FOUND)
