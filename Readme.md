@@ -11,7 +11,8 @@ A lightweight Django-based web application designed to provide travel recommenda
 - **Daily Data Updates**: Automatically updates weather and air quality data every day at 12:00 AM using APScheduler.
 - **Health Check Endpoint**: Includes a `/health/` endpoint to monitor the application's health and database connectivity.
 - **User Authentication**: Implements user authentication using Django Simple JWT for secure access to APIs.
-- **User Management**: Supports user registration, password change, and listing all registered users.
+- **User Management**: Supports user registration, password change, and listing all registered users.ni
+- **Unit Tests**: Includes comprehensive unit tests for API endpoints to ensure reliability and correctness.
 - **SQLite Database**: Uses SQLite for a lightweight and minimalistic database setup.
 - **Postman Collection**: Provides a Postman collection for easy testing of all API endpoints.
 - **Dockerized Setup**: Includes a Docker configuration for containerized deployment and simplified setup.
