@@ -103,7 +103,9 @@ class TravelRecommendationView(APIView):
                     status=status.HTTP_404_NOT_FOUND,
                 )
 
-            temp_diff = (dest_data.temperature or 0) - (current_data.temperature or 0)
+            temp_diff = (dest_data.temperature or 0) - (
+                current_data.temperature or 0
+            )  # wheater api return null values for some of the days. thats why considering 0
             pm25_diff = (dest_data.pm2_5 or 0) - (current_data.pm2_5 or 0)
             logger.info(
                 f"Temperature difference: {temp_diff}, PM2.5 difference: {pm25_diff}"
@@ -138,7 +140,7 @@ class TravelRecommendationView(APIView):
             )
 
     def generate_recommendation(self, temp_diff, pm25_diff):
-        if temp_diff <= 0 and pm25_diff <= 0:
+        if temp_diff < 0 and pm25_diff < 0:
             recommendation = "Recommended"
             reason = f"Your destination is {abs(round(temp_diff, 1))}°C cooler and has significantly better air quality. Enjoy your trip!"
         else:
