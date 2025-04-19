@@ -4,7 +4,7 @@
 
    ```bash
       git clone https://github.com/Mehedi182/weather-based-travel-recommendation.git
-      cd customer_support_service_app
+      cd weather-based-travel-recommendation
    ```
 
 2. **Create a Virtual Environment and Install Dependencies**:
