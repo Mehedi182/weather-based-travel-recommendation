@@ -7,5 +7,14 @@ services:
       - "8000:8000"
     volumes:
       - .:/app
-    command: []
-    entrypoint: /app/entrypoint.sh
+    command: >
+      /bin/sh -c "
+      echo 'Running migrations...' &&
+      python manage.py migrate &&
+      echo 'Migrations complete.' &&
+
+      echo 'Starting to load districts wheater and airquality data(take some times for first time)...' &&
+      python manage.py load_districts &&
+
+      echo 'Starting Django server...' &&
+      exec python manage.py runserver 0.0.0.0:8000"
