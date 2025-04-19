@@ -23,8 +23,8 @@ A lightweight Django-based web application designed to provide travel recommenda
 1. **Clone the Repository**:
 
    ```bash
-   git clone https://github.com/Mehedi182/weather-based-travel-recommendation.git
-   cd customer_support_service_app
+      git clone https://github.com/Mehedi182/weather-based-travel-recommendation.git
+      cd weather-based-travel-recommendation
    ```
 
 2. **Create a Virtual Environment and Install Dependencies**:
