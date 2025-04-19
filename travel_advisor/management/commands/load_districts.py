@@ -130,7 +130,7 @@ def district_wise_data() -> pd.DataFrame:
         longitude = district["long"]
         district_name = district["name"]
         print(
-            f"Fetching and loading data for {district_name} (Lat: {latitude}, Long: {longitude})"
+            f"Fetching data for {district_name} (Lat: {latitude}, Long: {longitude})"
         )
 
         try:
@@ -161,7 +161,7 @@ class Command(BaseCommand):
             ]
         else:
             district_datas = []
-
+        print("Loading District Data.....")
         with transaction.atomic():
             DistrictWeatherData.objects.bulk_create(district_datas, batch_size=1000)
 
